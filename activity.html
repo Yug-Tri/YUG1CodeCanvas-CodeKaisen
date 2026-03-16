@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity &amp; Habits – CodeCanvas</title>
+  <link rel="stylesheet" href="activity.css">
+</head>
+<body>
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar">
+    <div class="logo-area">
+      <div class="logo">
+        <img src="logo-placeholder.png" alt="Kaizen AI logo" class="logo-img">
+      </div>
+      <span class="sidebar-brand">Kaizen AI</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-link active">Activity &amp; Habits</a>
+      <a href="#" class="nav-link">AI Insights</a>
+      <a href="#" class="nav-link">Graphs</a>
+      <a href="#" class="nav-link">History</a>
+      <a href="#" class="nav-link">Pomodoro</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="streak">🔥 Streak: 5 days</span>
+      <button class="btn-sign-out">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <main class="content">
+
+    <!-- Welcome Banner -->
+    <section class="welcome-banner">
+      <span class="welcome-icon">👋</span>
+      <div class="welcome-text">
+        <h2>Welcome back!</h2>
+        <p>Track your habits and stay productive today.</p>
+      </div>
+    </section>
+
+    <!-- Two-Column Layout -->
+    <div class="two-col">
+
+      <!-- Timer Card -->
+      <div class="card timer-card">
+        <h3>Focus Timer</h3>
+        <div class="mode-tabs">
+          <button class="mode-btn active">Focus</button>
+          <button class="mode-btn">Short Break</button>
+          <button class="mode-btn">Long Break</button>
+        </div>
+        <div class="timer-display">25:00</div>
+        <div class="timer-controls">
+          <button class="btn-primary">Start</button>
+          <button class="btn-secondary">Reset</button>
+        </div>
+      </div>
+
+      <!-- Stats Card -->
+      <div class="card">
+        <h3>Today's Stats</h3>
+        <p class="stat-line">Sessions completed: <strong>3</strong></p>
+        <p class="stat-line">Total focus time: <strong>1h 15m</strong></p>
+        <p class="stat-line">Habits completed: <strong>4 / 6</strong></p>
+        <p class="stat-line">Current streak: <strong>5 days</strong></p>
+      </div>
+
+    </div>
+
+    <!-- History Card -->
+    <div class="card">
+      <h3>Recent History</h3>
+      <ul class="history-list">
+        <li class="history-item">
+          <details>
+            <summary class="history-date">March 15, 2026</summary>
+            <div class="history-details">
+              <p>Focus sessions: 4</p>
+              <p>Total time: 1h 40m</p>
+              <p>Habits: 5 / 6</p>
+            </div>
+          </details>
+        </li>
+        <li class="history-item">
+          <details>
+            <summary class="history-date">March 14, 2026</summary>
+            <div class="history-details">
+              <p>Focus sessions: 3</p>
+              <p>Total time: 1h 15m</p>
+              <p>Habits: 4 / 6</p>
+            </div>
+          </details>
+        </li>
+        <li class="history-item">
+          <details>
+            <summary class="history-date">March 13, 2026</summary>
+            <div class="history-details">
+              <p>Focus sessions: 5</p>
+              <p>Total time: 2h 05m</p>
+              <p>Habits: 6 / 6</p>
+            </div>
+          </details>
+        </li>
+      </ul>
+    </div>
+
+  </main>
+
+</body>
+</html>
