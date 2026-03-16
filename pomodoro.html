@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomodoro Focus Mode – CodeCanvas</title>
+  <link rel="stylesheet" href="pomodoro.css" />
+</head>
+<body>
+
+  <!-- ===== Sidebar ===== -->
+  <aside class="sidebar">
+    <div class="logo-area">
+      <span class="logo">🌱</span>
+      <span class="sidebar-brand">Tree Kaizen AI</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-link">📋 Dashboard</a>
+      <a href="#" class="nav-link">📈 Activity</a>
+      <a href="#" class="nav-link">📊 Graphs</a>
+      <a href="#" class="nav-link">🕓 History</a>
+      <a href="#" class="nav-link">🤖 AI</a>
+      <a href="#" class="nav-link active">⏱ Pomodoro</a>
+      <a href="#" class="nav-link">🌙 Ambient</a>
+      <a href="#" class="nav-link">👤 Profile</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="streak">🔥 Streak: 5 days</span>
+      <button class="btn-sign-out">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- ===== Main Content ===== -->
+  <main class="content">
+
+    <!-- Welcome Banner -->
+    <section class="welcome-banner">
+      <span class="welcome-icon">⏱</span>
+      <div class="welcome-text">
+        <h2>Pomodoro Focus Mode</h2>
+        <p>Stay focused with timed work sessions and scheduled breaks.</p>
+      </div>
+    </section>
+
+    <!-- Timer + Stats Row -->
+    <div class="two-col">
+
+      <!-- Timer Card -->
+      <section class="card timer-card">
+        <div class="mode-tabs">
+          <button class="mode-btn active" data-minutes="25">Focus</button>
+          <button class="mode-btn" data-minutes="5">Short Break</button>
+          <button class="mode-btn" data-minutes="15">Long Break</button>
+        </div>
+
+        <div class="timer-display" id="timer-display">25:00</div>
+
+        <div class="timer-controls">
+          <button class="btn-primary" id="btn-start">Start</button>
+          <button class="btn-secondary" id="btn-reset">Reset</button>
+        </div>
+      </section>
+
+      <!-- Today's Stats Card -->
+      <section class="card">
+        <h3>Today's Stats</h3>
+        <p class="stat-line"><strong id="stat-sessions">0</strong> sessions completed</p>
+        <p class="stat-line"><strong id="stat-minutes">0</strong> minutes focused</p>
+        <p class="stat-line"><strong id="stat-streak">5</strong> day streak</p>
+      </section>
+    </div>
+
+    <!-- Session History -->
+    <section class="card">
+      <h3>Session History</h3>
+      <ul class="history-list" id="history-list">
+        <li class="history-item">
+          <details>
+            <summary class="history-date">Today – March 16, 2026</summary>
+            <div class="history-details">
+              <p>No sessions recorded yet. Start your first focus session!</p>
+            </div>
+          </details>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <script>
+    /* ===== Pomodoro Timer Logic ===== */
+    (function () {
+      let totalSeconds = 25 * 60;
+      let remainingSeconds = totalSeconds;
+      let timerInterval = null;
+      let isRunning = false;
+      let sessionsCompleted = 0;
+      let minutesFocused = 0;
+      let currentMode = 'Focus';
+
+      const display = document.getElementById('timer-display');
+      const btnStart = document.getElementById('btn-start');
+      const btnReset = document.getElementById('btn-reset');
+      const modeBtns = document.querySelectorAll('.mode-btn');
+      const statSessions = document.getElementById('stat-sessions');
+      const statMinutes = document.getElementById('stat-minutes');
+      const historyList = document.getElementById('history-list');
+
+      function formatTime(secs) {
+        const m = Math.floor(secs / 60).toString().padStart(2, '0');
+        const s = (secs % 60).toString().padStart(2, '0');
+        return m + ':' + s;
+      }
+
+      function updateDisplay() {
+        display.textContent = formatTime(remainingSeconds);
+      }
+
+      function tick() {
+        if (remainingSeconds <= 0) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          isRunning = false;
+          btnStart.textContent = 'Start';
+          onSessionComplete();
+          return;
+        }
+        remainingSeconds--;
+        updateDisplay();
+      }
+
+      function onSessionComplete() {
+        if (currentMode === 'Focus') {
+          sessionsCompleted++;
+          minutesFocused += Math.round(totalSeconds / 60);
+          statSessions.textContent = sessionsCompleted;
+          statMinutes.textContent = minutesFocused;
+          addHistoryEntry();
+        }
+      }
+
+      function addHistoryEntry() {
+        const now = new Date();
+        const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const detail = document.querySelector('.history-details');
+        if (detail) {
+          const existing = detail.querySelector('p');
+          if (existing && existing.textContent.includes('No sessions')) {
+            existing.remove();
+          }
+          const p = document.createElement('p');
+          p.textContent = '✅ ' + Math.round(totalSeconds / 60) + ' min focus session completed at ' + time;
+          detail.appendChild(p);
+        }
+      }
+
+      btnStart.addEventListener('click', function () {
+        if (isRunning) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          isRunning = false;
+          btnStart.textContent = 'Start';
+        } else {
+          timerInterval = setInterval(tick, 1000);
+          isRunning = true;
+          btnStart.textContent = 'Pause';
+        }
+      });
+
+      btnReset.addEventListener('click', function () {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        isRunning = false;
+        remainingSeconds = totalSeconds;
+        btnStart.textContent = 'Start';
+        updateDisplay();
+      });
+
+      modeBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          modeBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          clearInterval(timerInterval);
+          timerInterval = null;
+          isRunning = false;
+          totalSeconds = parseInt(btn.dataset.minutes) * 60;
+          remainingSeconds = totalSeconds;
+          currentMode = btn.textContent;
+          btnStart.textContent = 'Start';
+          updateDisplay();
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
