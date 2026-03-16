@@ -134,7 +134,7 @@
       function onSessionComplete() {
         if (currentMode === 'Focus') {
           sessionsCompleted++;
-          minutesFocused += totalSeconds / 60;
+          minutesFocused += Math.round(totalSeconds / 60);
           statSessions.textContent = sessionsCompleted;
           statMinutes.textContent = minutesFocused;
           addHistoryEntry();
@@ -151,7 +151,7 @@
             existing.remove();
           }
           const p = document.createElement('p');
-          p.textContent = '✅ ' + (totalSeconds / 60) + ' min focus session completed at ' + time;
+          p.textContent = '✅ ' + Math.round(totalSeconds / 60) + ' min focus session completed at ' + time;
           detail.appendChild(p);
         }
       }
