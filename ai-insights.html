@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeCanvas – AI Insights</title>
+  <link rel="stylesheet" href="ai-insights.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo-area">
+      <div class="logo">🧠</div>
+      <span class="sidebar-brand">Kaizen AI</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-link active">Dashboard</a>
+      <a href="#" class="nav-link">Tasks</a>
+      <a href="#" class="nav-link">Habits</a>
+      <a href="#" class="nav-link">History</a>
+      <a href="#" class="nav-link">Settings</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="streak">🔥 5-day streak</span>
+      <button class="btn-sign-out">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+
+    <!-- Welcome Banner -->
+    <section class="welcome-banner">
+      <span class="welcome-icon">👋</span>
+      <div class="welcome-text">
+        <h2>Welcome back!</h2>
+        <p>Stay focused and keep building great habits.</p>
+      </div>
+    </section>
+
+    <!-- Timer -->
+    <section class="card timer-card">
+      <h3>Focus Timer</h3>
+      <div class="mode-tabs">
+        <button class="mode-btn active">Pomodoro</button>
+        <button class="mode-btn">Short Break</button>
+        <button class="mode-btn">Long Break</button>
+      </div>
+      <div class="timer-display">25:00</div>
+      <div class="timer-controls">
+        <button class="btn-primary">Start</button>
+        <button class="btn-secondary">Reset</button>
+      </div>
+    </section>
+
+    <!-- Two-Column: Stats & History -->
+    <div class="two-col">
+      <section class="card">
+        <h3>Today's Stats</h3>
+        <p class="stat-line"><strong>Sessions:</strong> 3</p>
+        <p class="stat-line"><strong>Focus time:</strong> 1 h 15 min</p>
+        <p class="stat-line"><strong>Tasks done:</strong> 5 / 8</p>
+      </section>
+
+      <section class="card">
+        <h3>Recent History</h3>
+        <ul class="history-list">
+          <li class="history-item">
+            <details>
+              <summary class="history-date">Mar 15, 2026</summary>
+              <div class="history-details">
+                <p>4 sessions – 1 h 40 min</p>
+                <p>6 tasks completed</p>
+              </div>
+            </details>
+          </li>
+          <li class="history-item">
+            <details>
+              <summary class="history-date">Mar 14, 2026</summary>
+              <div class="history-details">
+                <p>3 sessions – 1 h 15 min</p>
+                <p>5 tasks completed</p>
+              </div>
+            </details>
+          </li>
+          <li class="history-item">
+            <details>
+              <summary class="history-date">Mar 13, 2026</summary>
+              <div class="history-details">
+                <p>2 sessions – 50 min</p>
+                <p>3 tasks completed</p>
+              </div>
+            </details>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+  </main>
+
+</body>
+</html>
